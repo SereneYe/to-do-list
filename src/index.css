@@ -1,13 +1,280 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+:root {
+  --color-highlight: #d8b2ae;
+  --color-lightest: #ecebe4;
+  --color-light: #66bac2;
+  --color-medium: #429ea6;
+  --color-dark: #05747e;
+  --color-p3: #006921;
+  --color-p2: #ffcc00;
+  --color-p1: #ff3f3f;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
+
+html {
+  font-size: 62.5%;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  padding: 2rem;
+  align-items: center;
+  justify-content: center;
+  overscroll-behavior-y: none;
+}
+h1 {
+  font-size: 2.8rem;
+  text-transform: uppercase;
+  align-self: center;
+  margin-bottom: 1.6rem;
+}
+
+.sidebar {
+  flex-basis: 100%;
+  width: 60vh;
+  height: 90vh;
+  background-color: var(--color-highlight);
+  padding: 3.8rem 5rem;
+  border-radius: 18px;
+  display: flex;
+  flex-direction: column;
+}
+
+.app {
+  height: 90vh;
+  display: grid;
+  grid-template-columns: 1.5fr;
+  column-gap: 4rem;
+  align-items: start;
+}
+.plan-list {
+  list-style: none;
+  height: 62vh;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  font-size: 1.4rem;
+  margin-bottom: 2rem;
+}
+.plan-list::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+.plan-list::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.plan-list::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
+
+.button {
+  background-color: var(--color-medium);
+  color: #ffffff;
+  padding: 0.6rem 0.8rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.button:hover {
+  background-color: var(--color-dark);
+}
+
+.plan-item {
+  display: grid;
+  grid-template-columns: auto 3fr auto auto auto;
+  font-size: 1.6rem;
+  align-items: center;
+  column-gap: 1.4rem;
+  row-gap: 0.2rem;
+  padding: 1.4rem 1.4rem 1.4rem 0;
+  border-radius: 8px;
+  transition: 0.8s;
+}
+
+.selected,
+.sidebar li:hover {
+  background-color: var(--color-lightest);
+}
+.plan-priority1:hover {
+  border-left: 5px solid var(--color-p1);
+}
+.plan-priority2:hover {
+  border-left: 5px solid var(--color-p2);
+}
+.plan-priority3:hover {
+  border-left: 5px solid var(--color-p3);
+}
+
+.sidebar li h3 {
+  grid-row: 1;
+  grid-column: 2;
+}
+
+.sidebar li p {
+  grid-row: 2;
+  grid-column: 2;
+}
+.sidebar li .button-detail {
+  grid-row: span 2;
+  grid-column: 4;
+}
+
+.sidebar li .button-delete {
+  grid-row: span 2;
+  grid-column: 5;
+}
+
+/* check-box */
+.check-box {
+  grid-row: span 2;
+  grid-column: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-items: center;
+}
+
+.check-box *,
+.check-box *:after,
+.check-box *:before {
+  box-sizing: border-box;
+}
+
+.check-box input {
+  opacity: 0;
+}
+
+.check-box input:checked + label svg path {
+  stroke-dashoffset: 0;
+}
+
+.check-box input:focus + label {
+  transform: scale(1.03);
+}
+
+.check-box input + label {
+  display: block;
+  border: 2px solid var(--color-dark);
+  width: 3rem;
+  height: 3rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.check-box input + label:active {
+  transform: scale(1.05);
+  border-radius: 12px;
+}
+
+.check-box input + label svg {
+  pointer-events: none;
+  padding: 5%;
+}
+
+.check-box input + label svg path {
+  fill: none;
+  stroke: var(--color-dark);
+  stroke-width: 4px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 101;
+  transition: all 250ms cubic-bezier(1, 0, 0.37, 0.91);
+}
+
+/*  */
+.sidebar > li .button {
+  float: right;
+  margin-right: 1.2rem;
+}
+
+.add-plan {
+  font-size: 1.6rem;
+  display: grid;
+  align-items: center;
+  gap: 1.2rem;
+  background-color: var(--color-lightest);
+  border-radius: 12px;
+  grid-template-columns: 1fr 1.5fr;
+  margin-bottom: 1.6rem;
+  padding: 1.4rem;
+}
+
+.add-plan label {
+  font-weight: 500;
+  padding-left: 1rem;
+}
+
+input,
+select {
+  font-family: inherit;
+  color: inherit;
+  font-size: 1.6rem;
+  padding: 0.7rem;
+  text-align: center;
+  border: 2px solid var(--color-light);
+  border-radius: 12px;
+  transition: 0.3s;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border: 2px solid var(--color-dark);
+}
+
+.add-plan .button {
+  margin-top: 0.6rem;
+  grid-column: 1/-1;
+}
+
+.button-box {
+  display: flex;
+  align-items: center;
+  gap: 1.2em;
+  margin-bottom: 1rem;
+}
+
+.sort-button {
+  border: none;
+  font-weight: 600;
+  font-size: 1.3rem;
+  background-color: var(--color-medium);
+  color: var(--color-lightest);
+}
+.sort-button:hover {
+  border: none;
+  background-color: var(--color-dark);
+}
+.sort-button:focus {
+  border: none;
+  background-color: var(--color-dark);
+}
+.clear-button {
+  font-weight: 600;
+  font-size: 1.3rem;
+  font-family: -apple-system, BlinkMacSystemFont;
+}
+
+/* .add-plan {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.add-plan.show {
+  opacity: 1;
+} */
